@@ -23,6 +23,7 @@
 #define GPIOI_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x2000)
 #define GPIOJ_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x2400)
 #define RCC_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x3800)
+//Hello I am here for test purposes only
 
 /*
  *
