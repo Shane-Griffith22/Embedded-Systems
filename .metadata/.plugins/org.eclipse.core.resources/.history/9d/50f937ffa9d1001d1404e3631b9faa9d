@@ -1,0 +1,154 @@
+/*
+ * Driver.h
+ *
+ *  Created on: Mar 26, 2023
+ *      Author: shane
+ */
+
+#ifndef DRIVER_H_
+#define DRIVER_H_
+
+#define __vo	volatile
+
+#define AHB1_PERIPHERAL_BASEADDR		(0x40020000U)
+
+#define GPIOA_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x0000)
+#define GPIOB_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x0400)
+#define GPIOC_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x0800)
+#define GPIOD_BASEADDR					AHB1_PERIPHERAL_BASEADDR + 0x0C00
+#define GPIOE_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x1000)
+#define GPIOF_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x1400)
+#define GPIOG_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x1800)
+#define GPIOH_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x1C00)
+#define GPIOI_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x2000)
+#define GPIOJ_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x2400)
+#define RCC_BASEADDR					(AHB1_PERIPHERAL_BASEADDR + 0x3800)
+
+/*
+ *
+ * Rcc Peripheral Definition Structure
+ */
+
+typedef struct{
+
+	__vo uint32_t	CR;
+	__vo uint32_t 	PLLCFGR;
+	__vo uint32_t 	CFGR;
+	__vo uint32_t	CIR;
+	__vo uint32_t	AHB1RSTR;
+	__vo uint32_t	AHB2RSTR;
+	__vo uint32_t	AHB3RSTR;
+	 uint32_t	Reserved0;
+	__vo uint32_t	APB1RSTR;
+	__vo uint32_t	APB2RSTR;
+	uint32_t	Reserved1;
+	uint32_t	Reserved2;
+	__vo uint32_t	AHB1ENR;
+	__vo uint32_t	AHB2ENR;
+	__vo uint32_t	AHB3ENR;
+	uint32_t	Reserved3;
+	__vo uint32_t	APB1ENR;
+	__vo uint32_t	APB2ENR;
+	uint32_t	Reserved4;
+	uint32_t	Reserved5;
+	__vo uint32_t	AHB1LPENR;
+	__vo uint32_t	AHB2LPENR;
+	__vo uint32_t	AHB3LPENR;
+	uint32_t	Reserved6;
+	__vo uint32_t	APB1LPENR;
+	__vo uint32_t	APB2LPENR;
+	uint32_t	Reserved7;
+	uint32_t	Reserved8;
+	__vo uint32_t 	BDCR;
+	__vo uint32_t 	CSR;
+	uint32_t	Reserved9;
+	uint32_t	Reserved10;
+	__vo uint32_t	SSCGR;
+	__vo uint32_t	PLLI2SCFGR;
+	__vo uint32_t	PLLSAICFGR;
+	__vo uint32_t	DCKCFGR;
+
+}RCC_RegDef_t;
+
+#define RCC				((RCC_RegDef_t*) RCC_BASEADDR)
+
+typedef struct{
+
+	__vo uint32_t	MODER;
+	__vo uint32_t	OTYPER;
+	__vo uint32_t 	OSPEEDR;
+	__vo uint32_t	PUPDR;
+	__vo uint32_t	IDR;
+	__vo uint32_t	ODR;
+	__vo uint32_t	BSRR;
+	__vo uint32_t	LCKR;
+	__vo uint32_t 	AFRL;
+	__vo uint32_t 	AFRH;
+
+}GPIO_RegDef_t;
+
+
+
+
+#define GPIOA			((GPIO_RegDef_t*) GPIOA_BASEADDR)
+#define GPIOB			((GPIO_RegDef_t*) GPIOB_BASEADDR)
+#define	GPIOC			((GPIO_RegDef_t*) GPIOC_BASEADDR)
+#define	GPIOD			((GPIO_RegDef_t*) GPIOD_BASEADDR)
+#define	GPIOE			((GPIO_RegDef_t*) GPIOE_BASEADDR)
+#define	GPIOF			((GPIO_RegDef_t*) GPIOF_BASEADDR)
+#define	GPIOG			((GPIO_RegDef_t*) GPIOG_BASEADDR)
+#define	GPIOH			((GPIO_RegDef_t*) GPIOH_BASEADDR)
+#define	GPIOI			((GPIO_RegDef_t*) GPIOI_BASEADDR)
+#define GPIOJ			((GPIO_RegDef_t*) GPIOJ_BASEADDR)
+/*
+ * Useful Macros
+ */
+
+//PUPD Register
+#define GPIOD_PIN8_PU	GPIOD->PUPDR |= (1 << 16)
+#define GPOID_PIN9_PU	GPIOD->PUPDR |= (1 << 18)
+#define GPOID_PIN10_PU	GPIOD->PUPDR |= (1 << 20)
+#define GPOID_PIN11_PU	GPIOD->PUPDR |= (1 << 22)
+
+
+//Enable Clock for GPIOD
+
+#define GPIOD_PCLK_EN	RCC->AHB1ENR |= (1 << 3)
+#define GPIOA_PCLK_EN	RCC->AHB1ENR |= (1 << 0)
+#define GPIOJ_PCLK_EN	RCC->AHB1ENR |= (1 << 9);
+
+//Enable GPIOD Pins 12 13 14 15 for output
+#define GPIOD_PIN0_OUT  GPIOD->MODER |= (1 << 0)
+#define GPIOD_PIN1_OUT  GPIOD->MODER |= (1 << 2)
+#define GPIOD_PIN2_OUT  GPIOD->MODER |= (1 << 4)
+#define GPIOD_PIN3_OUT  GPIOD->MODER |= (1 << 6)
+#define GPIOD_PIN12_OUT	GPIOD->MODER |= (1 << 24)
+#define GPIOD_PIN13_OUT	GPIOD->MODER |= (1 << 26)
+#define GPIOD_PIN14_OUT	GPIOD->MODER |= (1 << 28)
+#define GPIOD_PIN15_OUT GPIOD->MODER |= (1 << 30)
+
+
+//Configure pins for input
+#define GPIOA_PIN0_IN 	GPIOA->MODER &= ~(3 << 0)
+
+//Turn on LEDs
+
+#define GREEN_LED_ON		GPIOD->ODR |= (1 << 12)
+#define ORANGE_LED_ON		GPIOD->ODR |= (1 << 13)
+#define RED_LED_ON			GPIOD->ODR |= (1 << 14)
+#define BLUE_LED_ON			GPIOD->ODR |= (1 << 15)
+
+
+//Turn off LED's
+#define GREEN_LED_OFF 		GPIOD->ODR &= ~(1 << 12);
+#define ORANGE_LED_OFF 	GPIOD->ODR &= ~(1 << 13);
+#define RED_LED_OFF 		GPIOD->ODR &= ~(1 << 14);
+#define BLUE_LED_OFF 		GPIOD->ODR &= ~(1 << 15);
+
+
+
+
+
+
+
+#endif /* DRIVER_H_ */

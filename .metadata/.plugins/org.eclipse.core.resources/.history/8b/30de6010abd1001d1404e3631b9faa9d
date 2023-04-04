@@ -1,0 +1,37 @@
+/*
+ * DriverImplementation.h
+ *
+ *  Created on: Apr 2, 2023
+ *      Author: shane
+ */
+
+
+#ifndef DRIVERIMPLEMENTATION_H_
+#define DRIVERIMPLEMENTATION_H_
+
+#include "Driver.h"
+
+int main(void){
+	//Enables clock for GPIOD
+			GPIOD_PCLK_EN;
+
+
+
+			//Configure PA0-PD3 for Output
+			GPIOD_PIN0_OUT;
+			GPIOD_PIN1_OUT;
+			GPIOD_PIN2_OUT;
+			GPIOD_PIN3_OUT;
+
+
+}
+
+
+
+
+
+
+
+
+
+#endif /* DRIVERIMPLEMENTATION_H_ */

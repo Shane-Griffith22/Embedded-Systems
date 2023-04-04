@@ -1,0 +1,17 @@
+22:10:53 **** Incremental Build of configuration Debug for project 006LEDTOGGLE ****
+make -j16 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "006LEDTOGGLE.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\shane\OneDrive\Documents\STM32 Discovery Projects\006LEDTOGGLE\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="006LEDTOGGLE.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 006LEDTOGGLE.elf
+ 
+arm-none-eabi-size   006LEDTOGGLE.elf 
+arm-none-eabi-objdump -h -S  006LEDTOGGLE.elf  > "006LEDTOGGLE.list"
+   text	   data	    bss	    dec	    hex	filename
+   4552	    108	   1588	   6248	   1868	006LEDTOGGLE.elf
+Finished building: default.size.stdout
+ 
+Finished building: 006LEDTOGGLE.list
+ 
+
+22:10:54 Build Finished. 0 errors, 0 warnings. (took 941ms)
+
